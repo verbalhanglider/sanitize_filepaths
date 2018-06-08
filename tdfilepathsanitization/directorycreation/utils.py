@@ -5,20 +5,23 @@ from os import sep
 def whitelist_approved_chars(some_path_as_string):
     new_word = []
     for character in some_path_as_string:
-        if character in ['/', '\\', ':']: 
+        if character in ['/', '\\', ':', '~', '_']: 
             new_word.append(character)
         elif character.isalnum():
             new_word.append(character)
         else:
-            raise ValueError("invalid character in your path")
+            raise ValueError("invalid character '{}' in your path".format(character))
     return ''.join(new_word)
 
 def remove_unsafe_path_traversal_commands(some_path_as_string):
+    print(some_path_as_string)
     words_list = some_path_as_string.split(sep)    
+    print(words_list)
     new_words_list = []
     for word in words_list:
         if not '..' in word:
             new_words_list.append(word)
+    print(new_words_list)
     return '{}'.format(sep).join(new_words_list)
 
 def are_the_parents_extant(some_path_as_string):
@@ -36,7 +39,7 @@ def does_the_path_exist_already(some_path_as_string):
 
 def create_unextant_parents(some_path_as_string):
     logical_parents = Path(some_path_as_string).parents
-    for parent in logical_parents:
+    for parent in sorted(logical_parents):
         create_directory(parent.as_posix())
     return some_path_as_string
 
