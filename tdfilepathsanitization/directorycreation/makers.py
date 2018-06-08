@@ -32,6 +32,8 @@ class DirectoryPathBuilder:
                 yield n.path
 
     def add_file(self, mimetype=None, binary_data=None):
+        file_creator = VALID_MIMETYPES.get(mimetype)
         if mimetype in VALID_MIMETYPES:
+            
             pass
         return "hi"
