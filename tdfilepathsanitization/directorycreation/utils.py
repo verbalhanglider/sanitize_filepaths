@@ -14,14 +14,11 @@ def whitelist_approved_chars(some_path_as_string):
     return ''.join(new_word)
 
 def remove_unsafe_path_traversal_commands(some_path_as_string):
-    print(some_path_as_string)
     words_list = some_path_as_string.split(sep)    
-    print(words_list)
     new_words_list = []
     for word in words_list:
         if not '..' in word:
             new_words_list.append(word)
-    print(new_words_list)
     return '{}'.format(sep).join(new_words_list)
 
 def are_the_parents_extant(some_path_as_string):
